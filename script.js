@@ -3,32 +3,27 @@ const WA_LINK = `https://wa.me/${WA_NUMBER}`;
 
 // Helper for Admin Dashboard content selection
 window.updateCountryStages = function (countryId, stageId, gradeId) {
-    const country = document.getElementById(countryId).value;
     const stageSelect = document.getElementById(stageId);
     if (!stageSelect) return;
     stageSelect.innerHTML = '<option value="">اختر المرحلة</option>';
-    if (country === 'ALL') {
-        stageSelect.innerHTML += '<option value="ALL">كل المراحل</option>';
-    } else if (COUNTRY_SYSTEMS[country]) {
-        COUNTRY_SYSTEMS[country].forEach((stage, idx) => {
-            let opt = document.createElement('option');
-            opt.value = idx;
-            opt.textContent = stage.title;
-            stageSelect.appendChild(opt);
-        });
-    }
+    stageSelect.innerHTML += '<option value="ALL">كل المراحل</option>';
+    GRADE_SYSTEMS.forEach((stage, idx) => {
+        let opt = document.createElement('option');
+        opt.value = idx;
+        opt.textContent = stage.title;
+        stageSelect.appendChild(opt);
+    });
 };
 
 window.updateGrades = function (countryId, stageId, gradeId) {
-    const country = document.getElementById(countryId).value;
     const stageIdx = document.getElementById(stageId).value;
     const gradeSelect = document.getElementById(gradeId);
     if (!gradeSelect) return;
     gradeSelect.innerHTML = '<option value="">اختر الصف</option>';
-    if (country === 'ALL' || stageIdx === 'ALL') {
+    if (stageIdx === 'ALL' || stageIdx === "") {
         gradeSelect.innerHTML += '<option value="ALL">كل الصفوف</option>';
-    } else if (COUNTRY_SYSTEMS[country] && COUNTRY_SYSTEMS[country][stageIdx]) {
-        COUNTRY_SYSTEMS[country][stageIdx].grades.forEach(g => {
+    } else if (GRADE_SYSTEMS[stageIdx]) {
+        GRADE_SYSTEMS[stageIdx].grades.forEach(g => {
             let opt = document.createElement('option');
             opt.value = g.val;
             opt.textContent = g.name;
@@ -37,14 +32,11 @@ window.updateGrades = function (countryId, stageId, gradeId) {
     }
 };
 
-const COUNTRY_SYSTEMS = {
-    EG: [
-        { title: 'المرحلة الابتدائية', grades: [{ name: 'الأول الابتدائي', val: 1, num: 1 }, { name: 'الثاني', val: 2, num: 2 }, { name: 'الثالث', val: 3, num: 3 }, { name: 'الرابع', val: 4, num: 4 }, { name: 'الخامس', val: 5, num: 5 }, { name: 'السادس', val: 6, num: 6 }] },
-        { title: 'المرحلة الإعدادية', grades: [{ name: 'الأول الإعدادي', val: 7, num: 1 }, { name: 'الثاني الإعدادي', val: 8, num: 2 }, { name: 'الثالث الإعدادي', val: 9, num: 3 }] },
-        { title: 'الثانوية العلمي', grades: [{ name: 'الصف الأول الثانوي', val: 10, num: 1 }, { name: 'الثاني الثانوي', val: 11, num: 2 }, { name: 'الثالث الثانوي', val: 12, num: 3 }] },
-        { title: 'الثانوية الأدبي', grades: [{ name: 'الصف الأول الثانوي', val: 13, num: 1 }, { name: 'الثاني الثانوي', val: 14, num: 2 }, { name: 'الثالث الثانوي', val: 15, num: 3 }] }
-    ]
-};
+const GRADE_SYSTEMS = [
+    { title: 'المرحلة الابتدائية', grades: [{ name: 'الأول الابتدائي', val: 1, num: 1 }, { name: 'الثاني الابتدائي', val: 2, num: 2 }, { name: 'الثالث الابتدائي', val: 3, num: 3 }, { name: 'الرابع الابتدائي', val: 4, num: 4 }, { name: 'الخامس الابتدائي', val: 5, num: 5 }, { name: 'السادس الابتدائي', val: 6, num: 6 }] },
+    { title: 'المرحلة الإعدادية', grades: [{ name: 'الأول الإعدادي', val: 7, num: 1 }, { name: 'الثاني الإعدادي', val: 8, num: 2 }, { name: 'الثالث الإعدادي', val: 9, num: 3 }] },
+    { title: 'الثانوية العامة والأزهرية', grades: [{ name: 'الصف الأول الثانوي', val: 10, num: 1 }, { name: 'الثاني الثانوي', val: 11, num: 2 }, { name: 'الثالث الثانوي', val: 12, num: 3 }, { name: 'العلمي علوم', val: 13, num: 4 }, { name: 'العلمي رياضة', val: 14, num: 5 }, { name: 'الأدبي', val: 15, num: 6 }, { name: 'الثانوي الأزهري', val: 16, num: 7 }, { name: 'البكالوريا', val: 17, num: 8 }] }
+];
 
 const RATES = {
     EG: { cur: 'ج.م', rate: 1, dialect: { hero_sub: 'أهلاً بك في منصة لسان العرب التعليمية لتعلم اللغة العربية.', hero_t1: 'الخبرة مش بس رقم', hero_t2: 'دي حكايتنا في التعليم', discover: 'اكتشف المواد', login: 'تسجيل الدخول', stat_vid: 'فيديو تعليمي تفاعلي', stat_stu: 'طالب مسجل متفوق', stat_qa: 'سؤال وجواب محلول', smart1: 'تعرف إن كتبنا', smart2: 'بتتكلم؟', smart_desc: 'أقوى المذكرات لتأهيل الأوائل، مبسطة ومصممة بأحدث الأساليب.', suc1: 'انضم لآلاف الطلاب', suc2: 'المتفوقين وابدأ التميز!', hero_btn: 'استكشف الكورسات', req: 'اطلب دلوقتي', academy_name: 'منصة لسان العرب', hero_pill_left: 'طريقك للقمة', hero_pill_right_title: 'أفضل المعلمين', hero_pill_right_sub: 'شرح احترافي بجد', hero_quality: 'شرح ممتاز', success_student: 'الطالب المتفوق', private_lesson_title: 'حصة خصوصي', private_lesson_sub: 'انت دلوقتي VIP اسأل براحتك خالص', order_lesson: 'اطلب حصتك', live_students: 'الطلبة', live_teacher: 'المدرس', live_title: 'شرح مباشر مع نخبة من المدرسين', live_sub: 'شارك مع مدرسك انت وصحابك' } }
@@ -217,11 +209,10 @@ window.injectCartModal = function () {
 };
 
 window.renderMegaMenu = function () {
-    const cCode = localStorage.getItem('spedia_country') || 'EG';
     const grid = document.querySelector('.mega-menu-grid');
     if (!grid) return;
 
-    let structure = COUNTRY_SYSTEMS[cCode] || COUNTRY_SYSTEMS['EG'];
+    let structure = GRADE_SYSTEMS;
     grid.innerHTML = structure.map(stage => `
         <div class="mega-column">
             <h4>${stage.title}</h4>
@@ -246,8 +237,6 @@ function injectFloatingAdmin() {
 }
 window.openCountryModal = function (e) {
     if (e) e.preventDefault();
-    const modal = document.getElementById('country-modal');
-    if (modal) modal.style.display = 'flex';
 };
 
 window.closeCountryModal = function () {
@@ -287,27 +276,6 @@ window.injectFloatingAdmin = injectFloatingAdmin;
 
 
 window.attachGlobalEvents = function () {
-    const countryFlag = document.querySelector('.country-flag');
-    // Country links inside the dropdown - Delegation for better robustness
-    document.addEventListener('click', (e) => {
-        const link = e.target.closest('.country-dropdown a');
-        if (link) {
-            e.preventDefault();
-            const code = link.getAttribute('data-code');
-            if (code) {
-                localStorage.setItem('spedia_country', code);
-                window.location.reload();
-            }
-            return;
-        }
-
-        // Close dropdown if clicked outside - simplified
-        const menu = document.getElementById('country-dropdown-main');
-        if (menu && menu.style.display === 'block' && !e.target.closest('.country-flag') && !menu.contains(e.target)) {
-            menu.style.display = 'none';
-        }
-    });
-
     const btnDiscover = document.querySelector('.btn-rocket');
     if (btnDiscover) {
         btnDiscover.addEventListener('click', (e) => {
@@ -328,25 +296,13 @@ window.attachGlobalEvents = function () {
 };
 
 window.applyCountryRules = function () {
-    const cCode = localStorage.getItem('spedia_country') || 'EG';
+    const cCode = 'EG';
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         let text = window.getDialect(key, cCode);
         if (text) el.innerHTML = text;
     });
-
-    const flagImages = {
-        'KW': 'flag_kw.jpg',
-        'SA': 'https://flagcdn.com/sa.svg',
-        'AE': 'flag_ae.jpg',
-        'QA': 'https://flagcdn.com/qa.svg',
-        'OM': 'https://flagcdn.com/om.svg',
-        'EG': 'https://flagcdn.com/eg.svg',
-        'BH': 'https://flagcdn.com/bh.svg'
-    };
-    const mainFlag = document.querySelector('.country-flag img');
-    if (mainFlag) mainFlag.src = flagImages[cCode] || flagImages['EG'];
 };
 
 window.renderPrice = function (priceBase) {
@@ -375,8 +331,8 @@ window.renderCurrentPage = async function () {
             } catch (e) { console.warn(e); }
         }
 
-        // Filter by grade AND country
-        let filteredContent = content.filter(c => c.grade == g && (!c.country || c.country === 'ALL' || c.country === cCode));
+        // Filter by grade
+        let filteredContent = content.filter(c => c.grade == g);
 
         let books = filteredContent.filter(c => c.type == 'book');
         let courses = filteredContent.filter(c => c.type == 'course');
@@ -444,6 +400,13 @@ window.renderCurrentPage = async function () {
             window.location.href = 'index.html';
         }
     }
+
+    // Auto-populate stage dropdowns since we removed country
+    ['ct-stage', 'ex-stage', 'lnk-stage', 'af-stage', 'reg-stage'].forEach(id => {
+        if (document.getElementById(id)) {
+            window.updateCountryStages(null, id, null);
+        }
+    });
 
     // Observer Details
     const observer = new IntersectionObserver(entries => {
@@ -666,11 +629,10 @@ window.finishRegister = async function (e) {
     let name = document.getElementById('reg-name').value;
     let phone = document.getElementById('reg-phone').value;
     let grade = document.getElementById('reg-grade').value;
-    let country = document.getElementById('reg-country') ? document.getElementById('reg-country').value : 'EG';
 
-    if (!code || !name || !phone || !grade || !country) return alert("الرجاء إكمال كافة البيانات");
+    if (!code || !name || !phone || !grade) return alert("الرجاء إكمال كافة البيانات");
 
-    let newUser = { code, name, phone, grade, country, id: Date.now(), role: 'student' };
+    let newUser = { code, name, phone, grade, id: Date.now(), role: 'student' };
 
     if (window.fsData && window.fsData.addUser) {
         try {
@@ -718,12 +680,11 @@ window.submitCartOrder = function (e) {
     let cart = JSON.parse(localStorage.getItem('spedia_cart') || '[]');
     let name = document.getElementById('cart-name').value;
     let code = document.getElementById('cart-code').value;
-    let country = document.getElementById('cart-country').value;
     let payment = document.getElementById('cart-payment').value;
     let phone = document.getElementById('cart-phone').value;
 
     let itemsStr = cart.map(c => c.title).join(' , ');
-    let msg = `طلب جديد:\nالاسم: ${name}\nالكود: ${code || 'لا يوجد'}\nالدولة: ${country}\nطريقة الدفع: ${payment}\nللتواصل: ${phone}\nالمطلوب: ${itemsStr}`;
+    let msg = `طلب جديد:\nالاسم: ${name}\nالكود: ${code || 'لا يوجد'}\nطريقة الدفع: ${payment}\nللتواصل: ${phone}\nالمطلوب: ${itemsStr}`;
 
     localStorage.removeItem('spedia_cart');
     document.getElementById('cart-modal').style.display = 'none';
@@ -990,7 +951,7 @@ window.loadStudentData = async function (user) {
         exams = JSON.parse(localStorage.getItem('spedia_exams') || '[]');
     }
 
-    let myExams = exams.filter(ex => String(ex.grade) === String(user.grade) && (!ex.country || ex.country === 'ALL' || ex.country === cCode));
+    let myExams = exams.filter(ex => String(ex.grade) === String(user.grade));
     let listExams = document.getElementById('student-exams');
     if (listExams) {
         if (myExams.length) {
