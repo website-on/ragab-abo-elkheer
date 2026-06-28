@@ -1778,6 +1778,7 @@ section {
         font-size: 26px !important;
     }
 
+    #floating-admin-btn-static,
     #floating-admin-btn {
         width: 50px !important;
         height: 50px !important;
