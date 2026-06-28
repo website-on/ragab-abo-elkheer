@@ -35,7 +35,8 @@ window.updateGrades = function (countryId, stageId, gradeId) {
 const GRADE_SYSTEMS = [
     { title: 'المرحلة الابتدائية', grades: [{ name: 'الأول الابتدائي', val: 1, num: 1 }, { name: 'الثاني الابتدائي', val: 2, num: 2 }, { name: 'الثالث الابتدائي', val: 3, num: 3 }, { name: 'الرابع الابتدائي', val: 4, num: 4 }, { name: 'الخامس الابتدائي', val: 5, num: 5 }, { name: 'السادس الابتدائي', val: 6, num: 6 }] },
     { title: 'المرحلة الإعدادية', grades: [{ name: 'الأول الإعدادي', val: 7, num: 1 }, { name: 'الثاني الإعدادي', val: 8, num: 2 }, { name: 'الثالث الإعدادي', val: 9, num: 3 }] },
-    { title: 'الثانوية العامة والأزهرية', grades: [{ name: 'الصف الأول الثانوي', val: 10, num: 1 }, { name: 'الثاني الثانوي', val: 11, num: 2 }, { name: 'الثالث الثانوي', val: 12, num: 3 }, { name: 'العلمي علوم', val: 13, num: 4 }, { name: 'العلمي رياضة', val: 14, num: 5 }, { name: 'الأدبي', val: 15, num: 6 }, { name: 'الثانوي الأزهري', val: 16, num: 7 }, { name: 'البكالوريا', val: 17, num: 8 }] }
+    { title: 'الثانوية العامة', grades: [{ name: 'الصف الأول الثانوي', val: 10, num: 1 }, { name: 'الثاني الثانوي', val: 11, num: 2 }, { name: 'الثالث الثانوي', val: 12, num: 3 }, { name: 'علمي علوم', val: 13, num: 4 }, { name: 'علمي رياضة', val: 14, num: 5 }, { name: 'القسم الأدبي', val: 15, num: 6 }, { name: 'البكالوريا', val: 17, num: 7 }] },
+    { title: 'المرحلة الأزهرية', grades: [{ name: 'الابتدائي الأزهري', val: 101, num: 1 }, { name: 'الإعدادي الأزهري', val: 102, num: 2 }, { name: 'الأول الثانوي الأزهري', val: 103, num: 3 }, { name: 'الثاني الثانوي الأزهري', val: 104, num: 4 }, { name: 'الثالث الثانوي الأزهري', val: 16, num: 5 }] }
 ];
 
 const RATES = {
