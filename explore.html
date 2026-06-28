@@ -413,8 +413,7 @@
         });
 
         function renderStages() {
-            const cCode = localStorage.getItem('spedia_country') || 'EG';
-            const structure = COUNTRY_SYSTEMS[cCode] || COUNTRY_SYSTEMS['EG'];
+            const structure = GRADE_SYSTEMS;
 
             const grid = document.getElementById('stages-grid');
             grid.innerHTML = structure.map((stage, index) => {
