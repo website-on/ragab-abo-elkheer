@@ -1527,7 +1527,7 @@ section {
 
 /* Mobile Responsive Enhancements removed */
 
-@media (max-width: 900px) {
+@media (max-width: 991px) {
 
     /* Navbar & Header */
     .nav-container {
@@ -1535,12 +1535,26 @@ section {
         justify-content: center;
         align-items: center;
         gap: 15px;
+        padding: 10px;
     }
 
     .nav-actions {
         flex-wrap: wrap;
         justify-content: center;
         gap: 10px;
+    }
+
+    /* Global Fixes */
+    .container {
+        padding: 0 15px;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
     }
 
     /* Hero Section */
@@ -1556,7 +1570,7 @@ section {
 
     .hero-title-box h1,
     h1 {
-        font-size: 38px !important;
+        font-size: 40px !important;
         line-height: 1.3 !important;
     }
 
@@ -1585,21 +1599,23 @@ section {
     }
 
     .stat-info h3 {
-        font-size: 24px;
+        font-size: 24px !important;
     }
 
     .stat-info p {
-        font-size: 14px;
+        font-size: 14px !important;
     }
 
     .hero-mid h2,
     h2 {
         font-size: 28px !important;
+        line-height: 1.4 !important;
     }
 
     .hero-mid p,
     p {
         font-size: 16px !important;
+        line-height: 1.6 !important;
     }
 
     .hero-image {
@@ -1621,14 +1637,11 @@ section {
     .split-content {
         padding: 0 !important;
         text-align: center !important;
+        width: 100%;
     }
 
-    .split-content h2 {
-        font-size: 28px !important;
-    }
-
-    .split-content p {
-        font-size: 16px !important;
+    .split-image {
+        width: 100%;
     }
 
     /* Mega Menu */
@@ -1645,14 +1658,14 @@ section {
 
     /* Success Section */
     .huge-percent {
-        font-size: 60px;
-        top: 20px;
-        right: -10px;
+        font-size: 60px !important;
+        top: -10px;
+        right: 0;
     }
 
     .success-badge {
         font-size: 14px;
-        left: -10px;
+        left: 0;
         bottom: 10px;
     }
 
@@ -1670,37 +1683,20 @@ section {
         width: 100%;
         text-align: center;
         justify-content: center;
-    }
-
-    /* Global Fixes */
-    .container {
-        padding: 0 15px;
-    }
-
-    /* Floating Buttons */
-    #theme-toggle-btn,
-    .color-toggle {
-        bottom: 90px !important;
-        width: 50px !important;
-        height: 50px !important;
-        font-size: 20px !important;
-    }
-
-    #whatsapp-floating-btn,
-    a[href*="wa.me"],
-    .whatsapp {
-        width: 60px !important;
-        height: 60px !important;
-    }
-
-    #whatsapp-floating-btn i {
-        font-size: 30px !important;
+        max-width: 300px;
+        margin: 10px auto;
+        display: inline-flex;
     }
 
     /* Admin & Dashboard Overrides */
     .login-wrapper {
-        padding: 10px;
+        padding: 15px;
         margin: 20px auto;
+        width: 90%;
+    }
+
+    .login-container {
+        padding: 25px;
     }
 
     .admin-nav {
@@ -1717,17 +1713,18 @@ section {
         width: 100%;
     }
 
-    #sidebar {
+    .sidebar {
         transform: translateX(100%);
-        width: 250px;
+        width: 280px;
         position: fixed;
         right: 0;
         top: 0;
         height: 100vh;
         z-index: 9999;
+        transition: transform 0.3s ease;
     }
 
-    #sidebar.open {
+    .sidebar.open {
         transform: translateX(0);
         box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
     }
@@ -1744,15 +1741,94 @@ section {
         grid-template-columns: 1fr;
     }
 
+    .subjects-grid {
+        grid-template-columns: 1fr;
+    }
+
     .welcome-banner {
         flex-direction: column;
         text-align: center;
         gap: 20px;
+        padding: 20px;
     }
 
     .banner-img {
-        width: 180px !important;
-        height: 180px !important;
+        width: 150px !important;
+        height: 150px !important;
         margin: 0 auto;
+    }
+
+    /* Floating Buttons */
+    #theme-toggle-btn,
+    .color-toggle {
+        bottom: 90px !important;
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 20px !important;
+    }
+
+    #whatsapp-floating-btn,
+    a[href*="wa.me"],
+    .whatsapp {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    #whatsapp-floating-btn i {
+        font-size: 26px !important;
+    }
+
+    #floating-admin-btn-static {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 20px !important;
+        bottom: 20px !important;
+        left: 20px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-padding {
+        padding: 50px 15px !important;
+    }
+
+    .header-left,
+    .header-right {
+        gap: 10px;
+    }
+
+    .dashboard-header {
+        padding: 10px 15px;
+    }
+
+    .dashboard-content {
+        padding: 15px;
+    }
+
+    .search-bar {
+        width: 200px;
+    }
+
+    .wallet-badge {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .stat-card {
+        padding: 15px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .stat-card .icon {
+        margin: 0 auto;
+    }
+
+    .live-class-card {
+        padding: 15px;
+    }
+
+    .page-title-box h2 {
+        font-size: 22px;
     }
 }
