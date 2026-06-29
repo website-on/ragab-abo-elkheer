@@ -1459,9 +1459,9 @@ window.uploadToCloudinary = async function (file) {
 
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'husoon');
+    formData.append('upload_preset', 'op3np2xm');
 
-    const response = await fetch(`https://api.cloudinary.com/v1_1/dnbpfkeuk/${resourceType}/upload`, {
+    const response = await fetch(`https://api.cloudinary.com/v1_1/dt1nytaju/${resourceType}/upload`, {
         method: 'POST',
         body: formData
     });
@@ -1473,7 +1473,11 @@ window.uploadToCloudinary = async function (file) {
     }
 
     const data = await response.json();
-    return data.secure_url;
+    let url = data.secure_url;
+    if (data.resource_type === 'image') {
+        url = url.replace('/upload/', '/upload/f_auto,q_auto/');
+    }
+    return url;
 };
 
 
